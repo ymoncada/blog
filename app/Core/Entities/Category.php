@@ -10,7 +10,7 @@ class Category extends Model
     use SoftDeletes;
     protected $table = 'categories';
     //protected $connection = 'mysql';
-    protected $fillable = ['name','descrition'];
+    protected $fillable = ['name','description'];
 
     public function books()
     {
