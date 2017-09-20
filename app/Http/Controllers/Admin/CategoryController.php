@@ -5,17 +5,30 @@ namespace App\Http\Controllers\Admin;
 use App\Core\Entities\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Core\Repositories\CategoryRPY;
 
 class CategoryController extends Controller
 {
+    private $objCategoryRPY;
+
+    function __construct(CategoryRPY $objCategoryRPY){
+        $this->objCategoryRPY = $objCategoryRPY;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //dd($request);
+        $table = $this->objCategoryRPY->forTables($request);
+        //return view('catalogs.categories.index',compact('table'));
+        return view('catalogs.categories.index')->with(['table'=>$table]);
+        //return "data";
+        //$result=\App\Core\Entities\Category::all();
+        //return $result;
     }
 
     /**
@@ -36,7 +49,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,
+        ['name'=>'required','description'=>'required'],
+        ['name.required'=>'El nombre es obligatorio','description.required'=>'La description es obligatoria']);
+
+        $this->objCategoryRPY->forSave($request);
     }
 
     /**
@@ -70,7 +87,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $this->validate($request,
+        ['name'=>'required','description'=>'required'],
+        ['name.required'=>'El nombre es obligatorio','description.required'=>'La description es obligatoria']);
+
+        $this->objCategoryRPY->forUpdate($request,$category);
     }
 
     /**
