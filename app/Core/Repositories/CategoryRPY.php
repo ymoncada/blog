@@ -11,20 +11,23 @@ class CategoryRpy{
         if($request->ajax()){
             //para datatable
         }else{
-            $result = Category::orderBy('name','ASC')->paginate(2);
+            $filter=$request->name;
+            $result = Category::orderBy('name','ASC')
+            ->where('name','LIKE',"%$filter%") 
+            ->paginate(5)->appends('filter',$filter);
             return $result;
         }
     }
 
     public function forSave(Request $request){
         $objCategory = new Category();
-        $objCategory->fill($request_>all());
+        $objCategory->fill($request->all());
         //$objCategory->name=$request->name;
         $objCategory->save();
     }
 
     public function forUpdate(Request $request, Category $objCategory){
-        $objCategory->fill($request_>all());
+        $objCategory->fill($request->all());
         $objCategory->save();
     }
 }

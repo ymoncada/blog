@@ -10,7 +10,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin'], function(){
             var_dump("CARGANDO USUARIOS");
             factory(App\User::class,50)->create();
             var_dump("CARGANDO CATEGORIAS");
-            factory(App\Core\Entities\Category::class,50)->create();
+            factory(App\Core\Entities\Category::class,10)->create();
             var_dump("FINALIZACION EXITOSA");
         });
         

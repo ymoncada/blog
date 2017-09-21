@@ -6,7 +6,24 @@
                 LISTADO DE CATEGORIAS
             </div>
             <div class="panel-body">
-                <table>
+                <div class="col-lg-4">
+                    <a class="btn btn-primary btn-block" href="{{route('catalogos.categories.create')}}">
+                        <i class="fa fa-plus"></i>
+                        AGREGAR
+                    </a>
+                </div>
+                <div class="col-lg-8">
+                    {!! Form::open(['route'=>['catalogos.categories.index','method'=>'GET']) !!}
+                    <div class="input-group">
+                        <input type="text" name="filter" class="form-control" placeholder="buscar nombres..." value="{{$filter}}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button">BUSCAR</button>
+                        </span>
+                    </div><!-- /input-group -->
+                    {!! Form::close() !!}
+                </div>
+                
+                <table class="table">
                     <thead>
                         <th>NOMBRE</th>
                         <th>DESCRIPCION</th>
@@ -16,8 +33,11 @@
                         @forelse($table as $item)
                             <tr>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->descrption}}</td>
-                                <td></td>
+                                <td>{{$item->description}}</td>
+                                <td>
+                                    <a class="btn btn-primary btn-xs" href="{{route('catalogos.categories.edit',$item->id)}}">EDITAR</a>
+                                    <a class="btn btn-success btn-xs" href="{{route('catalogos.categories.show',$item->id)}}">VER</a>
+                                </td>
                             </tr>
                         @empty
                             <tr>
