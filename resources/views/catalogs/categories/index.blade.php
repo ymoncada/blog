@@ -13,7 +13,7 @@
                     </a>
                 </div>
                 <div class="col-lg-8">
-                    {!! Form::open(['route'=>['catalogos.categories.index','method'=>'GET']) !!}
+                    {!! Form::open(['route'=>'catalogos.categories.index','method'=>'GET']) !!}
                     <div class="input-group">
                         <input type="text" name="filter" class="form-control" placeholder="buscar nombres..." value="{{$filter}}">
                         <span class="input-group-btn">

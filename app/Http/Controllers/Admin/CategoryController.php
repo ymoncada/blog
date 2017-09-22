@@ -25,7 +25,7 @@ class CategoryController extends Controller
         //dd($request);
         $table = $this->objCategoryRPY->forTables($request);
         //return view('catalogs.categories.index',compact('table'));
-        return view('catalogs.categories.index')->with(['table'=>$table,'filter'=>$filter]);
+        return view('catalogs.categories.index')->with(['table'=>$table,'filter'=>$request->filter]);
         //return "data";
         //$result=\App\Core\Entities\Category::all();
         //return $result;
