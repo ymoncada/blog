@@ -11,10 +11,10 @@ class CategoryRpy{
         if($request->ajax()){
             //para datatable
         }else{
-            $filter=$request->name;
+            $filter=$request->filter;
             $result = Category::orderBy('name','ASC')
             ->where('name','LIKE',"%$filter%") 
-            ->paginate(5)->appends('filter',$filter);
+            ->paginate(4)->appends('filter',$filter);
             return $result;
         }
     }

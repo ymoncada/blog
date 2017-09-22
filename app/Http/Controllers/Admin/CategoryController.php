@@ -6,6 +6,7 @@ use App\Core\Entities\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Core\Repositories\CategoryRPY;
+use Messages;
 
 class CategoryController extends Controller
 {
@@ -22,6 +23,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
+        //Messages::infoRegisterCustom('Hola');
         //dd($request);
         $table = $this->objCategoryRPY->forTables($request);
         //return view('catalogs.categories.index',compact('table'));
@@ -54,6 +56,7 @@ class CategoryController extends Controller
         ['name.required'=>'El nombre es obligatorio','description.required'=>'La description es obligatoria']);
 
         $this->objCategoryRPY->forSave($request);
+        Messages::infoRegisterCustom('Registro guardado correctamente');
 
         return redirect()->route('catalogos.categories.index');
     }
@@ -94,6 +97,7 @@ class CategoryController extends Controller
         ['name.required'=>'El nombre es obligatorio','description.required'=>'La description es obligatoria']);
 
         $this->objCategoryRPY->forUpdate($request,$category);
+        Messages::infoRegisterCustom('Registro actualizado correctamente');
 
         return redirect()->route('catalogos.categories.index');
     }
@@ -106,6 +110,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        Messages::infoRegisterCustom('Registro eliminado correctamente');
+        
+        return redirect()->route('catalogos.categories.index');
     }
 }
